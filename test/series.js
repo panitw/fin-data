@@ -14,7 +14,7 @@ describe('Series', function () {
 		assert.equal(5, series.count());
 		assert.equal(1, series.value(0));
 		assert.equal(5, series.value(4));
-		assert.equal(undefined, series.value(5));
+		assert.equal(true, isNaN(series.value(5)));
 
 		assert.deepEqual([0,1,2,3,4], series.index());
 	});
@@ -26,7 +26,7 @@ describe('Series', function () {
 		assert.equal(5, series.count());
 		assert.equal(1, series.value('A'));
 		assert.equal(3, series.value('C'));
-		assert.equal(undefined, series.value('X'));
+		assert.equal(true, isNaN(series.value('X')));
 
 		assert.deepEqual(indices, series.index());
 	});
@@ -45,7 +45,7 @@ describe('Series', function () {
 		var series = new fin.Series([1,2,3], ['A','B','C']);
 		series.setIndex(['D','E','F']);
 
-		assert.equal(undefined, series.value('A'));
+		assert.equal(true, isNaN(series.value('A')));
 		assert.equal(1, series.value('D'));
 		assert.equal(2, series.value('E'));
 		assert.equal(3, series.value('F'));
