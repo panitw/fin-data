@@ -6,4 +6,4 @@ module.exports = {
 	DataFrame: DataFrame,
 	Series: Series,
 	random: random
-}
+};
