@@ -41,6 +41,18 @@ describe('Series', function () {
 		}
 	});
 
+	it('Can handle label as date object', function () {
+		var series = new fin.Series([1,2,3], [
+			new Date('2016-01-01'),
+			new Date('2016-01-02'),
+			new Date('2016-01-03')
+		]);
+
+		assert.equal(1, series.value(new Date('2016-01-01')));
+		assert.equal(2, series.value(new Date('2016-01-02')));
+		assert.equal(3, series.value(new Date('2016-01-03')));
+	});
+
 	it('method setIndex()', function () {
 		var series = new fin.Series([1,2,3], ['A','B','C']);
 		series.setIndex(['D','E','F']);
