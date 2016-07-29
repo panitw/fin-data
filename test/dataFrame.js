@@ -114,6 +114,7 @@ describe('DataFrame', function () {
 		assert.equal(true, isNaN(df.value('c3', 1)));
 		assert.equal(true, isNaN(df.value('c3', 2)));
 		assert.equal(true, isNaN(df.value('c3', 3)));
+		assert.deepEqual([100, NaN, NaN, NaN], df.value('c3'));
 		assert.equal(3, df.column().length);
 	});
 
