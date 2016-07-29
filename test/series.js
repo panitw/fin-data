@@ -70,7 +70,8 @@ describe('Series', function () {
 
 		assert.equal(4, series.value('A'));
 		assert.equal(5, series.value('D'));
-		assert(4, series.count());
+		assert.equal(4, series.count());
+		assert.deepEqual(['A','B','C','D'], series.index());
 	});
 
 	it('method add() with static value', function () {
