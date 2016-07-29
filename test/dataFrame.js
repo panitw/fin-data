@@ -127,4 +127,15 @@ describe('DataFrame', function () {
 		df.setValueAtLoc('c1', 1, 100);
 		assert.equal(100, df.value('c1', 'B'));		
 	});
+
+	it('Support setting new value at the new index', function () {
+		var df = new fin.DataFrame([
+			new fin.Series([0, 1, 2, 3], ['A', 'B', 'C', 'D']),
+			new fin.Series([4, 5, 6, 7], ['A', 'B', 'E', 'F'])
+		], ['c1', 'c2']);
+
+		df.setValue('c1', 'G', 100);
+		assert.equal(100, df.value('c1', 'G'));
+		assert.deepEqual(['A', 'B', 'C', 'D', 'E', 'F', 'G'], df.index());
+	});
 });
