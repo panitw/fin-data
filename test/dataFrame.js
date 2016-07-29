@@ -138,4 +138,13 @@ describe('DataFrame', function () {
 		assert.equal(100, df.value('c1', 'G'));
 		assert.deepEqual(['A', 'B', 'C', 'D', 'E', 'F', 'G'], df.index());
 	});
+
+	it('Returns null when getting row of an invalid index', function () {
+		var df = new fin.DataFrame([
+			new fin.Series([0, 1, 2, 3], ['A', 'B', 'C', 'D']),
+			new fin.Series([4, 5, 6, 7], ['A', 'B', 'E', 'F'])
+		], ['c1', 'c2']);
+
+		assert.equal(null, df.row('G'));		
+	})
 });
