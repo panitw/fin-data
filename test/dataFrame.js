@@ -91,4 +91,30 @@ describe('DataFrame', function () {
 		assert.equal(10, df.value('c2', indices[5]));
 	});
 
+	it('Support setting new value to exiting column', function () {
+		var df = new fin.DataFrame([
+			[0, 1, 2, 3],
+			[4, 5, 6, 7]
+		], ['c1', 'c2']);
+
+		assert.equal(0, df.value('c1', 0));
+		df.setValue('c1', 0, 100);
+		assert.equal(100, df.value('c1', 0));
+	});
+
+	it('Support setting new value to new column', function () {
+		var df = new fin.DataFrame([
+			[0, 1, 2, 3],
+			[4, 5, 6, 7]
+		], ['c1', 'c2']);
+
+		assert.equal(true, isNaN(df.value('c3', 0)));
+		df.setValue('c3', 0, 100);
+		assert.equal(100, df.value('c3', 0));
+		assert.equal(true, isNaN(df.value('c3', 1)));
+		assert.equal(true, isNaN(df.value('c3', 2)));
+		assert.equal(true, isNaN(df.value('c3', 3)));
+		assert.equal(3, df.column().length);
+	});
+
 });
