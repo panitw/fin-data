@@ -145,6 +145,21 @@ describe('DataFrame', function () {
 			new fin.Series([4, 5, 6, 7], ['A', 'B', 'E', 'F'])
 		], ['c1', 'c2']);
 
-		assert.equal(null, df.row('G'));		
+		assert.equal(null, df.row('G'));
+	});
+
+	it('Support setting data by row', function () {
+		var df = new fin.DataFrame();
+		df.setRow(new Date('2016-01-01'), {c1: 1, c2: 5});
+		df.setRow(new Date('2016-01-02'), {c1: 2, c2: 6});
+		df.setRow(new Date('2016-01-03'), {c1: 3, c3: 7});
+		df.setRow(new Date('2016-01-04'), {c1: 4, c2: 8});
+
+		assert.deepEqual([1, 2, 3, 4], df.value('c1'));
+		assert.deepEqual([5, 6, NaN, 8], df.value('c2'));
+		assert.deepEqual([NaN, NaN, 7, NaN], df.value('c3'));
+
+		df.setRow(new Date('2016-01-01'), {c1: 10, c2: 20, c3: 30});
+		assert.deepEqual([10, 2, 3, 4], df.value('c1'));
 	})
 });
