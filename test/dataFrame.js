@@ -161,5 +161,20 @@ describe('DataFrame', function () {
 
 		df.setRow(new Date('2016-01-01'), {c1: 10, c2: 20, c3: 30});
 		assert.deepEqual([10, 2, 3, 4], df.value('c1'));
-	})
+	});
+
+	it('Support filtering', function () {
+		var df = new fin.DataFrame({
+			'c1': [0, 1, 2, 3],
+			'c2': [4, 5, 6, 7]
+		});
+		var filtered = df.filter(function (row) {
+			return ((row.c2 % 2) === 0)
+		});
+		assert.equal(2, filtered.count());
+		assert.equal(0, filtered.value('c1', 0));
+		assert.equal(4, filtered.value('c2', 0));
+		assert.equal(2, filtered.value('c1', 2));
+		assert.equal(6, filtered.value('c2', 2));
+	});
 });
