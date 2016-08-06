@@ -177,4 +177,19 @@ describe('DataFrame', function () {
 		assert.equal(2, filtered.value('c1', 2));
 		assert.equal(6, filtered.value('c2', 2));
 	});
+
+	it('Support sorting', function () {
+		var df = new fin.DataFrame({
+			'c1': [8, 1, 7, 9],
+			'c2': [4, 2, 6, 7]
+		});
+
+		df.sort('c1');
+		assert.deepEqual([1, 2, 0, 3], df.index());
+		assert.deepEqual([1, 7, 8, 9], df.value('c1'));
+		df.sort('c1', 'd');
+		assert.deepEqual([9, 8, 7, 1], df.value('c1'));
+		df.sort('c1', 'a');
+		assert.deepEqual([1, 7, 8, 9], df.value('c1'));
+	});
 });
