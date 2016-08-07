@@ -178,6 +178,21 @@ describe('DataFrame', function () {
 		assert.equal(6, filtered.value('c2', 2));
 	});
 
+	it('Support by index', function () {
+		var df = new fin.DataFrame({
+			'c1': [0, 1, 2, 3],
+			'c2': [4, 5, 6, 7]
+		});
+		var filtered = df.filter(function (row, index) {
+			return (index < 2);
+		});
+		assert.equal(2, filtered.count());
+		assert.equal(0, filtered.value('c1', 0));
+		assert.equal(4, filtered.value('c2', 0));
+		assert.equal(1, filtered.value('c1', 1));
+		assert.equal(5, filtered.value('c2', 1));
+	});	
+
 	it('Support sorting', function () {
 		var df = new fin.DataFrame({
 			'c1': [8, 1, 7, 9],
