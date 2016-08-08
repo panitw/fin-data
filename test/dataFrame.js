@@ -207,4 +207,14 @@ describe('DataFrame', function () {
 		df.sort('c1', 'a');
 		assert.deepEqual([1, 7, 8, 9], df.value('c1'));
 	});
+
+	it('Drawdown', function () {
+		var df = new fin.DataFrame({
+			'c1': [1, 2, 4, 2, 1, 2, 3, 4]
+		});
+
+		df.drawdown('c1', 'ct_dd');
+		assert.deepEqual([0, 0, 0, -0.5, -0.75, -0.5, -0.25, 0], df.value('ct_dd'));
+		assert.equal(-0.75, df.maximumDrawdown('c1'));
+	});
 });
