@@ -148,6 +148,18 @@ describe('DataFrame', function () {
 		assert.equal(null, df.row('G'));
 	});
 
+	it('Support getting index value at location', function () {
+		var df = new fin.DataFrame([
+			new fin.Series([0, 1, 2, 3], ['A', 'B', 'C', 'D']),
+			new fin.Series([4, 5, 6, 7], ['A', 'B', 'E', 'F'])
+		], ['c1', 'c2']);
+
+		assert.equal('A', df.indexAtLoc(0));
+		assert.equal('E', df.indexAtLoc(4));
+		assert.equal('F', df.indexAtLoc(5));
+	});
+
+
 	it('Support setting data by row', function () {
 		var df = new fin.DataFrame();
 		df.setRow(new Date('2016-01-01'), {c1: 1, c2: 5});
@@ -178,7 +190,7 @@ describe('DataFrame', function () {
 		assert.equal(6, filtered.value('c2', 2));
 	});
 
-	it('Support by index', function () {
+	it('Support filtering by index', function () {
 		var df = new fin.DataFrame({
 			'c1': [0, 1, 2, 3],
 			'c2': [4, 5, 6, 7]
