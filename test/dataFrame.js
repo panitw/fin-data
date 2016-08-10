@@ -216,5 +216,7 @@ describe('DataFrame', function () {
 		df.drawdown('c1', 'ct_dd');
 		assert.deepEqual([0, 0, 0, -0.5, -0.75, -0.5, -0.25, 0], df.value('ct_dd'));
 		assert.equal(-0.75, df.maximumDrawdown('c1'));
+		assert.deepEqual({startIndex: 2, endIndex: 7}, df.drawdownDuration('c1'));
 	});
+
 });

@@ -1,9 +1,6 @@
-var fin = require('./index');
+var moment = require('moment');
 
+var days = moment('2016-12-31').diff('2015-01-01', 'days');
 
-var df = new fin.DataFrame({
-    'c1' : [0, 1, 2, 3],
-    'c2' : [4, 5, 6, 7]
-});
-
-console.log(df.index());
+console.log(days + ' days');
+console.log(Math.round(days / 365) + ' years');
