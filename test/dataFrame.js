@@ -220,6 +220,20 @@ describe('DataFrame', function () {
 		assert.deepEqual([1, 7, 8, 9], df.value('c1'));
 	});
 
+	it('Support array generation', function () {
+		var df = new fin.DataFrame({
+			'c1': [0, 1, 2, 3],
+			'c2': [4, 5, 6, 7]
+		});
+		var array = df.toArray();
+		assert.deepEqual([
+			{c1: 0, c2: 4},
+			{c1: 1, c2: 5},
+			{c1: 2, c2: 6},
+			{c1: 3, c2: 7}
+		], array);
+	});
+
 	it('Drawdown', function () {
 		var df = new fin.DataFrame({
 			'c1': [1, 2, 4, 2, 1, 2, 3, 4]
