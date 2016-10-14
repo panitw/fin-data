@@ -159,6 +159,16 @@ describe('DataFrame', function () {
 		assert.equal('F', df.indexAtLoc(5));
 	});
 
+	it('Support getting location of the specified index', function () {
+		var df = new fin.DataFrame([
+			new fin.Series([0, 1, 2], [new Date('2000-01-01'), new Date('2000-01-02'), new Date('2000-01-03')]),
+			new fin.Series([4, 5, 6], [new Date('2000-01-01'), new Date('2000-01-02'), new Date('2000-01-03')])
+		], ['c1', 'c2']);
+
+		assert.equal(0, df.locOfIndex(new Date('2000-01-01')));
+		assert.equal(2, df.locOfIndex(new Date('2000-01-03')));
+		assert.equal(-1, df.locOfIndex(new Date('2000-01-05')));
+	});
 
 	it('Support setting data by row', function () {
 		var df = new fin.DataFrame();
@@ -227,10 +237,10 @@ describe('DataFrame', function () {
 		});
 		var array = df.toArray();
 		assert.deepEqual([
-			{c1: 0, c2: 4},
-			{c1: 1, c2: 5},
-			{c1: 2, c2: 6},
-			{c1: 3, c2: 7}
+			{__index: 0, c1: 0, c2: 4},
+			{__index: 1, c1: 1, c2: 5},
+			{__index: 2, c1: 2, c2: 6},
+			{__index: 3, c1: 3, c2: 7}
 		], array);
 	});
 
